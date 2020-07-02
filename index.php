@@ -15,8 +15,8 @@
         <p>Fill in the values ​​between which you want to extract a number (random).</p>
       </div>
       <?php
-        $min_default_value = 0; // min value for html input atr.
-        $max_default_value = 100; // max value for html input atr.
+        $min_default_value = 0; // min value for html input.
+        $max_default_value = 100; // max value for html input.
         $number_result = "&infin;"; // default value for number_result before submit.
         $error = "";
         if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,21 +24,25 @@
           $number_min = $min_default_value = $_POST["min"];
           $number_max = $max_default_value = $_POST["max"];
 
+          // check if the numbers are equal.
           if($number_min === $number_max) {
             $error = "The numbers entered are equal..";
             $number_is_ok = 0;
           }
 
+          // check if 'min' is less than 'max'.
           if($number_min > $number_max) {
             $error = "'MAX' must be greater than 'MIN'.";
             $number_is_ok = 0;
           }
 
+          // check if the inputs are empty.
           if($number_min == "" || $number_max == "") {
             $error = "You forgot to something!";
             $number_is_ok = 0;
           }
 
+          // checks for errors and displayed a random number.
           if($number_is_ok == 1) {
             $number_result = rand($number_min, $number_max);
           }
